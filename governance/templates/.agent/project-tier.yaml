@@ -1,0 +1,47 @@
+# Project tier declaration. Sets the bar that governance-check enforces.
+#
+# tier 0 — sandbox / scratch repo
+# tier 1 — shipping product or library
+# tier 2 — high-stakes (security-sensitive, data-sensitive, financially relevant)
+# tier 3 — autonomous, multi-agent, or long-running production system
+
+tier: 1
+
+reasons:
+  - replace this with the reason your project is at this tier
+
+required_artifacts:
+  tier_0:
+    - CONSTITUTION.md
+    - GOVERNANCE.md
+    - AGENTS.md
+    - memory/inbox.md
+    - memory/index.md
+
+  tier_1:
+    - CONSTITUTION.md
+    - GOVERNANCE.md
+    - AGENTS.md
+    - INTERACTION_STANDARDS.md
+    - ANTI_PATTERNS.md
+    - PROJECT_MEMORY_CONTRACT.md
+    - PROMOTION_QUEUE.md
+    - policy-map.md
+    - policy/
+    - memory/inbox.md
+    - memory/index.md
+
+  tier_2:
+    - all_of_tier_1
+    - policy/secrets.rego
+    - policy/dependencies.rego
+    - policy/git.rego
+    - policy/review.rego
+    - policy/tests/
+
+  tier_3:
+    - all_of_tier_2
+    - policy/deployment.rego
+    - .agent/audit-agents.yaml
+    - .agent/review-gates.yaml
+    - amendments/

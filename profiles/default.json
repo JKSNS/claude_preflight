@@ -1,0 +1,31 @@
+{
+  "_comment": "Single canonical config. Claude for everything except graphify, which uses Ollama qwen3.6:35b. No offline/online toggle.",
+  "profile_name": "default",
+  "env": {
+    "OLLAMA_HOST": "http://host.docker.internal:11434",
+    "GRAPHIFY_MODEL": "qwen3.6:35b",
+    "PREFLIGHT_EXTRACTION_MODEL": "ollama:qwen3.6:35b",
+    "PREFLIGHT_PRIMARY_MODEL": "claude-opus-4-7",
+    "PREFLIGHT_FAST_MODEL": "claude-haiku-4-5-20251001"
+  },
+  "models": {
+    "primary": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-7",
+      "description": "Architecture, complex reasoning, novel code design, governance"
+    },
+    "fast": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001",
+      "description": "Quick tasks, classification, triage"
+    },
+    "extraction": {
+      "provider": "ollama",
+      "model": "qwen3.6:35b",
+      "description": "Graphify semantic extraction (always local, $0)"
+    }
+  },
+  "required_models": [
+    "qwen3.6:35b"
+  ]
+}

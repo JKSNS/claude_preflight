@@ -1,0 +1,9 @@
+.claude_profile
+.claude_profile_env
+.claude/
+archive/snapshot-*/
+archive/fresh-*/
+staleness-report.md
+/audits/
+/.agent/
+/governance/councils/

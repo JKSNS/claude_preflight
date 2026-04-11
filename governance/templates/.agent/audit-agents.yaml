@@ -1,0 +1,72 @@
+# Adversarial audit roster. Consumed by scripts/adversarial-audit.sh.
+#
+# Each entry declares one reviewer. The script collects their findings into
+# audits/findings/ and surfaces severity, confidence, evidence, and an
+# amendment_candidate flag.
+
+audit_agents:
+
+  codex_reviewer:
+    purpose: code correctness, edge cases, implementation flaws, test adequacy
+    inputs:
+      - git_diff
+      - test_results
+      - relevant_architecture
+    outputs:
+      - findings
+      - severity
+      - affected_files
+      - recommended_patch
+    invocation:
+      type: codex
+      command: codex review
+      timeout_seconds: 600
+
+  devil_advocate:
+    purpose: challenge assumptions, requirements, hidden failure modes
+    inputs:
+      - git_diff
+      - PLAN.md
+      - ARCHITECTURE.md
+      - PROMOTION_QUEUE.md
+    outputs:
+      - challenged_assumptions
+      - missing_requirements
+      - amendment_candidates
+    invocation:
+      type: ollama
+      model: qwen3.6:35b
+      prompt: playbooks/devil-advocate.md
+
+  security_auditor:
+    purpose: vulnerabilities, secret exposure, supply-chain risk, policy gaps
+    inputs:
+      - git_diff
+      - dependency_files
+      - policy_map
+    outputs:
+      - findings
+      - exploitability
+      - mitigation
+      - policy_gaps
+    invocation:
+      type: ollama
+      model: qwen3.6:35b
+      prompt: playbooks/security-auditor.md
+
+  regression_hunter:
+    purpose: behavior changes and test coverage gaps
+    inputs:
+      - git_diff
+      - tests
+      - acceptance_criteria
+    outputs:
+      - missing_tests
+      - broken_assumptions
+    invocation:
+      type: ollama
+      model: qwen3.6:35b
+      prompt: playbooks/regression-hunter.md
+
+# Independence rule: the agent that authored a change may not be the same
+# agent that reviews it. Enforced in policy/review.rego.

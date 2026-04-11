@@ -1,0 +1,46 @@
+# Required review gates per change class.
+# Consumed by scripts/adversarial-audit.sh and policy/review.rego.
+
+artifact_classes:
+  doc:
+    required: []
+    optional:
+      - markdown_lint
+
+  code:
+    required:
+      - tests
+      - codex_review
+    optional:
+      - devil_advocate
+      - regression_review
+
+  dependency:
+    required:
+      - tests
+      - codex_review
+      - dependency_risk_review
+      - human_approval
+
+  policy:
+    required:
+      - policy_tests
+      - devil_advocate
+      - human_approval
+
+  security:
+    required:
+      - tests
+      - codex_review
+      - security_audit
+      - devil_advocate
+      - human_approval
+
+  deployment:
+    required:
+      - tests
+      - codex_review
+      - security_audit
+      - regression_review
+      - rollback_plan
+      - human_approval

@@ -1,0 +1,28 @@
+# Dependencies & environments
+.venv/
+venv/
+node_modules/
+__pycache__/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Git internals
+.git/
+
+# Claude worktrees
+.claude/worktrees/
+
+# Lock files (large, no semantic value)
+*.lock
+
+# Graphify intermediate files
+graphify-out/cache/
+graphify-out/.graphify_*
+
+# Binary / compiled
+*.pyc
+*.so
+*.whl
