@@ -1,0 +1,47 @@
+{
+  "_comment": "Offline profile — gemma4:26b for everything (highest quality OSS model), nemotron-cascade-2 as fast fallback. All local, $0.",
+  "profile_name": "offline",
+  "env": {
+    "CLAUDE_MODEL_PROFILE": "offline",
+    "OLLAMA_HOST": "http://host.docker.internal:11434",
+    "GRAPHIFY_MODEL": "gemma4:26b",
+    "PREFLIGHT_PRIMARY_MODEL": "ollama:gemma4:26b",
+    "PREFLIGHT_FAST_MODEL": "ollama:gemma4:26b",
+    "PREFLIGHT_EXTRACTION_MODEL": "ollama:gemma4:26b",
+    "PREFLIGHT_FALLBACK_PRIMARY": "ollama:nemotron-cascade-2",
+    "PREFLIGHT_FALLBACK_FAST": "ollama:nemotron-cascade-2"
+  },
+  "models": {
+    "primary": {
+      "provider": "ollama",
+      "model": "gemma4:26b",
+      "description": "Default for all roles — highest-quality open-source model"
+    },
+    "fast": {
+      "provider": "ollama",
+      "model": "gemma4:26b",
+      "description": "Quick tasks, classification, extraction"
+    },
+    "extraction": {
+      "provider": "ollama",
+      "model": "gemma4:26b",
+      "description": "Graphify semantic extraction"
+    }
+  },
+  "fallback_models": {
+    "primary": {
+      "provider": "ollama",
+      "model": "nemotron-cascade-2",
+      "description": "Blazing fast fallback if gemma4:26b is unavailable"
+    },
+    "fast": {
+      "provider": "ollama",
+      "model": "nemotron-cascade-2",
+      "description": "Blazing fast fallback if gemma4:26b is unavailable"
+    }
+  },
+  "required_models": [
+    "gemma4:26b",
+    "nemotron-cascade-2"
+  ]
+}

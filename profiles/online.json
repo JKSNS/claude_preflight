@@ -1,0 +1,53 @@
+{
+  "_comment": "Online profile — Anthropic API primary, gemma4:26b as offline fallback (top OSS model), nemotron-cascade-2 as speed fallback. Extraction always local.",
+  "profile_name": "online",
+  "env": {
+    "CLAUDE_MODEL_PROFILE": "online",
+    "OLLAMA_HOST": "http://host.docker.internal:11434",
+    "GRAPHIFY_MODEL": "gemma4:26b",
+    "PREFLIGHT_PRIMARY_MODEL": "claude-opus-4-6",
+    "PREFLIGHT_FAST_MODEL": "claude-haiku-4-5-20251001",
+    "PREFLIGHT_EXTRACTION_MODEL": "ollama:gemma4:26b",
+    "PREFLIGHT_FALLBACK_PRIMARY": "ollama:gemma4:26b",
+    "PREFLIGHT_FALLBACK_FAST": "ollama:gemma4:26b",
+    "PREFLIGHT_FALLBACK_SPEED": "ollama:nemotron-cascade-2"
+  },
+  "models": {
+    "primary": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-6",
+      "description": "Architecture, complex reasoning, novel code design"
+    },
+    "fast": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001",
+      "description": "Quick tasks, classification, triage"
+    },
+    "extraction": {
+      "provider": "ollama",
+      "model": "gemma4:26b",
+      "description": "Graphify semantic extraction (always local, $0)"
+    }
+  },
+  "fallback_models": {
+    "primary": {
+      "provider": "ollama",
+      "model": "gemma4:26b",
+      "description": "Offline fallback if Anthropic is unreachable (top OSS model)"
+    },
+    "fast": {
+      "provider": "ollama",
+      "model": "gemma4:26b",
+      "description": "Offline fallback if Anthropic is unreachable"
+    },
+    "speed": {
+      "provider": "ollama",
+      "model": "nemotron-cascade-2",
+      "description": "Blazing fast fallback when latency matters"
+    }
+  },
+  "required_models": [
+    "gemma4:26b",
+    "nemotron-cascade-2"
+  ]
+}
