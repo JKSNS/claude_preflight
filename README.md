@@ -478,11 +478,6 @@ hooks/
 /tmp/claude_preflight/uninstall.sh
 ```
 
-## Related
-
-- [claude_setup](https://github.com/JKSNS/claude_setup) - containerized Claude Code environment, safety hooks, base configuration
-- [claude_plugins](https://github.com/JKSNS/claude_plugins) - autoresearch, project management, media generation, custom MCP servers
-
 ## License
 
 CC BY-NC 4.0. Free to use and fork. Credit required. No commercial use.
